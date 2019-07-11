@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import EmployeeList from "./employee/EmployeeList"  // Import EmployeeList component
+import EmployeeList from "./employee/EmployeeList"
+import LocationList from "./location/LocationList.js"  // Import EmployeeList component
 
 
 export default class Kennel extends Component {  
@@ -29,9 +30,7 @@ state = {
     render() {
         return (
             <article className="kennel">
-                <h3>Student Kennels</h3>
-                <h4>Nashville North Location</h4>
-                <h5>500 Puppy Way</h5>
+                <LocationList />
                 <EmployeeList employees={this.state.employees} />
             </article>
         );
