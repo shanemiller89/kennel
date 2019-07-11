@@ -30,7 +30,7 @@ state = {
     render() {
         return (
             <article className="kennel">
-                <LocationList />
+                <LocationList locations={this.state.locations} />
                 <EmployeeList employees={this.state.employees} />
             </article>
         );
