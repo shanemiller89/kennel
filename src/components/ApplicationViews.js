@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import EmployeeList from "./employee/EmployeeList"
 import LocationList from "./location/LocationList.js"
 import AnimalList from './animal/AnimalList';
+import OwnerList from "./owner/OwnerList.js"
 
 
 export default class ApplicationViews extends Component {  
@@ -25,12 +26,12 @@ animalsFromAPI = [
     {id: 3, animal:"Dog" , name: "Snoopy", color:"white", ownerId: 3}
 ]
 ownersFromAPI = [
-    { id: 1, name: "Ryan Tanay" },
-    { id: 2, name: "Emma Beaton" },
-    { id: 3, name: "Dani Adkins" },
-    { id: 4, name: "Adam Oswalt" },
-    { id: 5, name: "Fletcher Bangs" },
-    { id: 6, name: "Angela Lee" }
+    { id: 1, name: "Ryan Tanay", phone: "555-555-5551"},
+    { id: 2, name: "Emma Beaton", phone: "555-555-5552"},
+    { id: 3, name: "Dani Adkins", phone: "555-555-5553"},
+    { id: 4, name: "Adam Oswalt", phone: "555-555-5554"},
+    { id: 5, name: "Fletcher Bangs", phone: "555-555-5555"},
+    { id: 6, name: "Angela Lee", phone:"555-555-5556"}
 ]
 
 state = {
@@ -50,6 +51,9 @@ state = {
                 }} />
                 <Route path="/employees" render={(props) => {
                     return <EmployeeList employees={this.state.employees} />
+                }} />
+                <Route path="/owners" render={(props) => {
+                    return <OwnerList owners={this.state.owners} />
                 }} />
             </React.Fragment>
         );
