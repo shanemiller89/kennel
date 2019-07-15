@@ -34,17 +34,15 @@ export default class ApplicationViews extends Component {
             .then(() => this.setState(newState))
     }
 
-    deleteAnimal = id => {
-        return fetch(`http://localhost:8088/animals/${id}`, {
+    deleteAny = (database, id) => {
+        return fetch(`http://localhost:8088/${database}/${id}`, {
             method: "DELETE"
         })
         .then(animalData => animalData.json())
-        .then(() => fetch(`http://localhost:8088/animals`))
-        .then(animalData => animalData.json())
-        .then(animals => this.setState({
-            animals: animals
-        })
-      )
+    //     .then(() => fetch(`http://localhost:8088/${database}`))
+    //     .then(Data => Data.json())
+    //     .then(animals => this.setState({animals: animals})
+    //   )
     }
 
     render() {
@@ -54,13 +52,13 @@ export default class ApplicationViews extends Component {
                     return <LocationList locations={this.state.locations} />
                 }} />
                 <Route path="/animals" render={(props) => {
-                    return <AnimalList animals={this.state.animals} owners={this.state.owners} />
+                    return <AnimalList animals={this.state.animals} owners={this.state.owners} deleteAny={this.deleteAny} />
                 }} />
                 <Route path="/employees" render={(props) => {
-                    return <EmployeeList employees={this.state.employees} />
+                    return <EmployeeList employees={this.state.employees} deleteAny={this.deleteAny} />
                 }} />
                 <Route path="/owners" render={(props) => {
-                    return <OwnerList owners={this.state.owners} />
+                    return <OwnerList owners={this.state.owners} deleteAny={this.deleteAny} />
                 }} />
                 <Route path="/search" render={(props) => {
                     return <SearchResults />
