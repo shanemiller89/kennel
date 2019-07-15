@@ -23,7 +23,7 @@ export default class NavBar extends Component {
                     </li>
                     <li className="nav-item">
                         <Link className="nav-link" to="/search">
-                        <input type="search" name="searhInput" placeholder="search" className="searchInput" />
+                        <input type="search" name="searhInput" placeholder="search" className="searchInput" onKeyPress="" />
                         </Link>
                     </li>
                 </ul>
