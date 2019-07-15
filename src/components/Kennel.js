@@ -6,10 +6,17 @@ import "./Kennel.css"
 
 
 export default class Kennel extends Component {  
+
+handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+        console.log ("You entered")
+    }
+}
+
     render() {
         return (
             <React.Fragment>
-                <NavBar />
+                <NavBar handleKeyPress={this.handleKeyPress} />
                 <ApplicationViews />
             </React.Fragment>
         );

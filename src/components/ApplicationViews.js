@@ -4,6 +4,7 @@ import EmployeeList from "./employee/EmployeeList"
 import LocationList from "./location/LocationList.js"
 import AnimalList from './animal/AnimalList';
 import OwnerList from "./owner/OwnerList.js"
+import SearchResults from "./search/SearchResults.js"
 
 
 export default class ApplicationViews extends Component {  
@@ -47,6 +48,9 @@ export default class ApplicationViews extends Component {
                 }} />
                 <Route path="/owners" render={(props) => {
                     return <OwnerList owners={this.state.owners} />
+                }} />
+                <Route path="/search" render={(props) => {
+                    return <SearchResults />
                 }} />
             </React.Fragment>
         );

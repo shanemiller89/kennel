@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import { Link } from "react-router-dom"
 import "bootstrap/dist/css/bootstrap.min.css"
+import "./NavBar.css"
 
 
 export default class NavBar extends Component {
@@ -19,6 +20,11 @@ export default class NavBar extends Component {
                     </li>
                     <li className="nav-item">
                         <Link className="nav-link" to="/employees">Employees</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link className="nav-link" to="/search">
+                        <input type="search" name="searhInput" placeholder="search" className="searchInput" onKeyDown={(event) => this.props.handleKeyPress(event)} />
+                        </Link>
                     </li>
                 </ul>
             </nav>
