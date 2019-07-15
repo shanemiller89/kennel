@@ -9,7 +9,7 @@ export default class EmployeeList extends Component {
           <div key={employee.id}>
             {employee.name}
             <br />
-            <button onClick={() => this.props.deleteAny("employees", employee.id)}>
+            <button onClick={() => this.props.deleteEmployee(employee.id)}>
               Promote to Customer
             </button>
           </div>

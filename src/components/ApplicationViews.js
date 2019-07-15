@@ -5,6 +5,7 @@ import LocationList from "./location/LocationList.js"
 import AnimalList from './animal/AnimalList';
 import OwnerList from "./owner/OwnerList.js"
 import SearchResults from "./search/SearchResults.js"
+import API from "../modules/API.js"
 
 
 export default class ApplicationViews extends Component {  
@@ -19,31 +20,29 @@ export default class ApplicationViews extends Component {
     componentDidMount() {
         const newState = {}
     
-        fetch("http://localhost:8088/animals")
-            .then(r => r.json())
+        API.getAll("animals")
             .then(animals => newState.animals = animals)
-            .then(() => fetch("http://localhost:8088/employees")
-            .then(r => r.json()))
+            .then(() => API.getAll("employees"))
             .then(employees => newState.employees = employees)
-            .then(() => fetch("http://localhost:8088/locations")
-            .then(r => r.json()))
+            .then(() => API.getAll("locations"))
             .then(locations => newState.locations = locations)
-            .then(() => fetch("http://localhost:8088/owners")
-            .then(r => r.json()))
+            .then(() => API.getAll("owners"))
             .then(owners => newState.owners = owners)
             .then(() => this.setState(newState))
     }
 
-    deleteAny = (database, id) => {
-        return fetch(`http://localhost:8088/${database}/${id}`, {
-            method: "DELETE"
-        })
-        .then(animalData => animalData.json())
-    //     .then(() => fetch(`http://localhost:8088/${database}`))
-    //     .then(Data => Data.json())
-    //     .then(animals => this.setState({database: animals})
-    //   )
+    deleteAnimal = (id) => {
+        API.delete("animals", id).then(animals => this.setState({animals: animals}))
     }
+    
+    deleteEmployee = (id) => {
+        API.delete("employees", id).then(employees => this.setState({employees: employees}))
+    }
+
+    deleteOwner = (id) => {
+        API.delete("owners", id).then(owners => this.setState({owners: owners}))
+    }
+
     
 
     render() {
@@ -53,13 +52,13 @@ export default class ApplicationViews extends Component {
                     return <LocationList locations={this.state.locations} />
                 }} />
                 <Route path="/animals" render={(props) => {
-                    return <AnimalList animals={this.state.animals} owners={this.state.owners} deleteAny={this.deleteAny} />
+                    return <AnimalList animals={this.state.animals} owners={this.state.owners} deleteAnimal={this.deleteAnimal} />
                 }} />
                 <Route path="/employees" render={(props) => {
-                    return <EmployeeList employees={this.state.employees} deleteAny={this.deleteAny} />
+                    return <EmployeeList employees={this.state.employees} deleteEmployee={this.deleteEmployee} />
                 }} />
                 <Route path="/owners" render={(props) => {
-                    return <OwnerList owners={this.state.owners} deleteAny={this.deleteAny} />
+                    return <OwnerList owners={this.state.owners} deleteOwner={this.deleteOwner} />
                 }} />
                 <Route path="/search" render={(props) => {
                     return <SearchResults />

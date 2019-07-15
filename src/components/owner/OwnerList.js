@@ -13,7 +13,7 @@ export default class OwnerList extends Component {
             </div>
             <div>{owner.phone}</div>
             <br />
-            <button onClick={() => this.props.deleteAny("owners", owner.id)}>
+            <button onClick={() => this.props.deleteOwner(owner.id)}>
               Leave Store
             </button>
           </div>
