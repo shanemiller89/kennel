@@ -41,9 +41,10 @@ export default class ApplicationViews extends Component {
         .then(animalData => animalData.json())
     //     .then(() => fetch(`http://localhost:8088/${database}`))
     //     .then(Data => Data.json())
-    //     .then(animals => this.setState({animals: animals})
+    //     .then(animals => this.setState({database: animals})
     //   )
     }
+    
 
     render() {
         return (
