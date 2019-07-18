@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import dog from "./DogIcon.svg"
 import "./Animal.css"
 
@@ -13,15 +14,7 @@ export default class AnimalList extends Component {
               <div className="card-title">
                 <img src={dog} alt="dog" className="icon--dog" />
                 <div>Name: {animal.name}</div>
-                <div>Animal Type: {animal.animal}</div>
-                <div>Color: {animal.color}</div>
-                {this.props.owners.map(owner =>
-                  owner.id === animal.ownerId ? (
-                    <div key={owner.id}>Owner: {owner.name}</div>
-                  ) : (
-                    ""
-                  )
-                )}
+                <Link className="nav-link" to={`/animals/${animal.id}`}>Details</Link>
                 <button
                   onClick={() => this.props.deleteAnimal(animal.id)}
                   className="card-link"
@@ -37,3 +30,5 @@ export default class AnimalList extends Component {
     );
   }
 }
+
+

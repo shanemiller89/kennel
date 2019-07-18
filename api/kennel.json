@@ -2,19 +2,23 @@
   "employees": [
     {
       "id": 1,
-      "name": "Jessica Younker"
+      "name": "Jessica Younker",
+      "position": "Supervisor"
     },
     {
       "id": 2,
-      "name": "Jordan Nelson"
+      "name": "Jordan Nelson",
+      "position": "Owner"
     },
     {
       "id": 3,
-      "name": "Zoe LeBlanc"
+      "name": "Zoe LeBlanc",
+      "position": "Crew"
     },
     {
       "id": 4,
-      "name": "Blaise Roberts"
+      "name": "Blaise Roberts",
+      "position": "Crew"
     }
   ],
   "locations": [
@@ -32,23 +36,20 @@
   "animals": [
     {
       "id": 1,
-      "animal": "Dog",
       "name": "Foxy",
-      "color": "red",
-      "ownerId": 1
+      "breed": "Golden Retriever",
+      "ownerId": 2
     },
     {
       "id": 2,
-      "animal": "Dog",
       "name": "Colby",
-      "color": "blonde",
+      "breed": "Lasso",
       "ownerId": 2
     },
     {
       "id": 3,
-      "animal": "Dog",
       "name": "Snoopy",
-      "color": "white",
+      "breed": "Beagle",
       "ownerId": 3
     }
   ],

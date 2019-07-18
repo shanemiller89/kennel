@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 export default class EmployeeList extends Component {
   render() {
@@ -9,9 +10,7 @@ export default class EmployeeList extends Component {
           <div key={employee.id}>
             {employee.name}
             <br />
-            <button onClick={() => this.props.deleteEmployee(employee.id)}>
-              Promote to Customer
-            </button>
+            <Link className="nav-link" to={`/employees/${employee.id}`}>Details</Link>
           </div>
         ))}
       </section>

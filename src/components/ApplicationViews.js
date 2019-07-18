@@ -1,14 +1,18 @@
 import { Route } from 'react-router-dom'
 import React, { Component } from 'react'
+import { withRouter } from 'react-router'
 import EmployeeList from "./employee/EmployeeList"
 import LocationList from "./location/LocationList.js"
+import LocationDetail from './location/LocationDetail'
 import AnimalList from './animal/AnimalList';
+import AnimalDetail from './animal/AnimalDetail'
+import EmployeeDetail from './employee/EmployeeDetail.js'
 import OwnerList from "./owner/OwnerList.js"
 import SearchResults from "./search/SearchResults.js"
 import API from "../modules/API.js"
 
 
-export default class ApplicationViews extends Component {  
+class ApplicationViews extends Component {  
 
     state = {
         employees: [],
@@ -32,11 +36,19 @@ export default class ApplicationViews extends Component {
     }
 
     deleteAnimal = (id) => {
-        API.delete("animals", id).then(animals => this.setState({animals: animals}))
+        API.delete("animals", id)
+        .then(animals => {
+            this.props.history.push("/animals")
+            this.setState({ animals: animals })
+        })
     }
     
     deleteEmployee = (id) => {
-        API.delete("employees", id).then(employees => this.setState({employees: employees}))
+        API.delete("employees", id)
+        .then(employees => {
+            this.props.history.push("/employees")
+            this.setState({employees: employees})
+        })
     }
 
     deleteOwner = (id) => {
@@ -51,11 +63,37 @@ export default class ApplicationViews extends Component {
                 <Route exact path="/" render={(props) => {
                     return <LocationList locations={this.state.locations} />
                 }} />
-                <Route path="/animals" render={(props) => {
+                <Route path="/locations/:locationId(\d+)" render={(props) => {
+                    let location = this.state.locations.find( location =>
+                        location.id === parseInt(props.match.params.locationId))
+                    if (!location) {
+                        location = {id:404, name:"404", address: "location not found"}
+                        }
+                    return <LocationDetail location={location} />
+                }} />
+                <Route exact path="/animals" render={(props) => {
                     return <AnimalList animals={this.state.animals} owners={this.state.owners} deleteAnimal={this.deleteAnimal} />
                 }} />
-                <Route path="/employees" render={(props) => {
+                <Route path="/animals/:animalId(\d+)" render={(props) => {
+                 // Find the animal with the id of the route parameter
+                let animal = this.state.animals.find(animal =>
+                animal.id === parseInt(props.match.params.animalId))
+                 // If the animal wasn't found, create a default one
+                if (!animal) {
+                animal = {id:404, name:"404", breed: "Dog not found"}
+                }
+                 return <AnimalDetail animal={ animal } owners={this.state.owners} deleteAnimal={ this.deleteAnimal } />
+                }} />
+                <Route exact path="/employees" render={(props) => {
                     return <EmployeeList employees={this.state.employees} deleteEmployee={this.deleteEmployee} />
+                }} />
+                <Route path="/employees/:employeeId(\d+)" render={(props) => {
+                    let employee = this.state.employees.find( employee =>
+                        employee.id === parseInt(props.match.params.employeeId))
+                    if (!employee) {
+                        employee = {id:404, name:"404", position: "Employee not found"}
+                        }
+                    return <EmployeeDetail employee={employee} deleteEmployee={this.deleteEmployee} />
                 }} />
                 <Route path="/owners" render={(props) => {
                     return <OwnerList owners={this.state.owners} deleteOwner={this.deleteOwner} />
@@ -67,3 +105,5 @@ export default class ApplicationViews extends Component {
         );
     }
 }
+
+export default withRouter(ApplicationViews)
