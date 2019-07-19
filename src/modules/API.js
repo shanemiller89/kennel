@@ -23,6 +23,15 @@ export default {
       },
       body: JSON.stringify(newData)
     }).then(data => data.json())
+  },
+  put(database, editedItem) {
+    return fetch(`${remoteURL}/${database}/${editedItem.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(editedItem)
+    }).then(data => data.json());
   }
 
 }

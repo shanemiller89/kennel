@@ -42,13 +42,13 @@
       "id": 1,
       "name": "Foxy",
       "breed": "Golden Retriever",
-      "ownerId": 2
+      "employeeId": 4
     },
     {
       "id": 3,
       "name": "Snoopy",
       "breed": "Beagle",
-      "ownerId": 3
+      "employeeId": 3
     },
     {
       "name": "Barky",

@@ -9,6 +9,7 @@ import LocationDetail from './location/LocationDetail'
 import AnimalList from './animal/AnimalList';
 import AnimalDetail from './animal/AnimalDetail'
 import AnimalForm from './animal/AnimalForm'
+import AnimalEditForm from './animal/AnimalEditForm'
 import OwnerList from "./owner/OwnerList.js"
 import OwnerForm from "./owner/OwnerForm"
 import SearchResults from "./search/SearchResults.js"
@@ -62,6 +63,16 @@ class ApplicationViews extends Component {
         API.delete("owners", id).then(owners => this.setState({owners: owners}))
     }
 
+    updateAnimal = (editedAnimalObject) => {
+        return API.put("animals", editedAnimalObject)
+        .then(() => API.getAll("animals"))
+        .then(animals => {
+          this.setState({
+            animals: animals
+          })
+        });
+      };
+
     addAnimal = animal =>
         API.post("animals", animal)
         .then(() => API.getAll("animals"))
@@ -114,7 +125,7 @@ class ApplicationViews extends Component {
                     return <Redirect to="/login" />
                 }
                 }} />
-                <Route path="/animals/:animalId(\d+)" render={(props) => {
+                <Route exact path="/animals/:animalId(\d+)" render={(props) => {
                 if (this.isAuthenticated()) {
                  // Find the animal with the id of the route parameter
                 let animal = this.state.animals.find(animal =>
@@ -128,6 +139,11 @@ class ApplicationViews extends Component {
                     return <Redirect to="/login" />
                 }
                 }} />
+                <Route
+                    exact path="/animals/:animalId(\d+)/edit" render={props => {
+                    return <AnimalEditForm {...props} employees={this.state.employees} updateAnimal={this.updateAnimal}/>
+                    }}
+                />
                 <Route path="/animals/new" render={(props) => {
                 if (this.isAuthenticated()) {
                 return <AnimalForm {...props}
