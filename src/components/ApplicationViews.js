@@ -10,6 +10,7 @@ import AnimalList from './animal/AnimalList';
 import AnimalDetail from './animal/AnimalDetail'
 import AnimalForm from './animal/AnimalForm'
 import OwnerList from "./owner/OwnerList.js"
+import OwnerForm from "./owner/OwnerForm"
 import SearchResults from "./search/SearchResults.js"
 import API from "../modules/API.js"
 
@@ -68,6 +69,13 @@ class ApplicationViews extends Component {
         .then(() => API.getAll("employees"))
         .then(employees =>
             this.setState({employees: employees}))
+    
+    addOwner = owner =>
+        API.post("owners", owner)
+        .then(() => API.getAll("owners"))
+        .then(owners =>
+            this.setState({owners: owners}))
+    
 
 
     
@@ -119,8 +127,12 @@ class ApplicationViews extends Component {
                     return <EmployeeForm {...props}
                        addEmployee={this.addEmployee} />
                 }} />
-                <Route path="/owners" render={(props) => {
-                    return <OwnerList owners={this.state.owners} deleteOwner={this.deleteOwner} />
+                <Route exact path="/owners" render={(props) => {
+                    return <OwnerList {...props} owners={this.state.owners} deleteOwner={this.deleteOwner} />
+                }} />
+                <Route path="/owners/new" render={(props) => {
+                    return <OwnerForm {...props}
+                       addOwner={this.addOwner} animals={this.state.animals} />
                 }} />
                 <Route path="/search" render={(props) => {
                     return <SearchResults />
