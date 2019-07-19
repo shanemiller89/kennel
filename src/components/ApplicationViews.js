@@ -6,6 +6,7 @@ import LocationList from "./location/LocationList.js"
 import LocationDetail from './location/LocationDetail'
 import AnimalList from './animal/AnimalList';
 import AnimalDetail from './animal/AnimalDetail'
+import AnimalForm from './animal/AnimalForm'
 import EmployeeDetail from './employee/EmployeeDetail.js'
 import OwnerList from "./owner/OwnerList.js"
 import SearchResults from "./search/SearchResults.js"
@@ -55,6 +56,12 @@ class ApplicationViews extends Component {
         API.delete("owners", id).then(owners => this.setState({owners: owners}))
     }
 
+    addAnimal = animal =>
+        API.post("animals", animal)
+        .then(() => API.getAll("animals"))
+        .then(animals => 
+            this.setState({animals: animals}))
+
     
 
     render() {
@@ -72,7 +79,7 @@ class ApplicationViews extends Component {
                     return <LocationDetail location={location} />
                 }} />
                 <Route exact path="/animals" render={(props) => {
-                    return <AnimalList animals={this.state.animals} owners={this.state.owners} deleteAnimal={this.deleteAnimal} />
+                    return <AnimalList {...props} animals={this.state.animals} owners={this.state.owners} deleteAnimal={this.deleteAnimal} />
                 }} />
                 <Route path="/animals/:animalId(\d+)" render={(props) => {
                  // Find the animal with the id of the route parameter
@@ -83,6 +90,11 @@ class ApplicationViews extends Component {
                 animal = {id:404, name:"404", breed: "Dog not found"}
                 }
                  return <AnimalDetail animal={ animal } owners={this.state.owners} deleteAnimal={ this.deleteAnimal } />
+                }} />
+                <Route path="/animals/new" render={(props) => {
+                return <AnimalForm {...props}
+                       addAnimal={this.addAnimal}
+                       employees={this.state.employees} />
                 }} />
                 <Route exact path="/employees" render={(props) => {
                     return <EmployeeList employees={this.state.employees} deleteEmployee={this.deleteEmployee} />
