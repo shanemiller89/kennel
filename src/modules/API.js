@@ -14,6 +14,15 @@ export default {
     .then(data => data.json())
     .then(() => fetch(`http://localhost:8088/${database}`))
     .then(data => data.json())
-}
+  },
+  post (database, newData) {
+    return fetch(`${remoteURL}/${database}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(newData)
+    }).then(data => data.json())
+  }
 
 }
