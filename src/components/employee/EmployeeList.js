@@ -1,5 +1,5 @@
 import React,{ Fragment, Component } from "react";
-import { Link } from "react-router-dom";
+import EmployeeCard from "./EmployeeCard"
 import './employee.css'
 
 export default class EmployeeList extends Component {
@@ -15,17 +15,40 @@ export default class EmployeeList extends Component {
            Hire Employee
           </button>
         </div>
-      <section className="employees">
-        <h1>Employee List</h1>
-        {this.props.employees.map(employee => (
-          <div key={employee.id}>
-            {employee.name}
-            <br />
-            <Link className="nav-link" to={`/employees/${employee.id}`}>Details</Link>
-          </div>
-        ))}
-      </section>
+        <section className="employees">
+        {
+                    this.props.employees.map(employee =>
+                        <EmployeeCard key={employee.id} employee={employee} {...this.props} />
+                    )
+                }
+        </section>
+
       </Fragment>
     );
   }
 }
+
+
+            // {
+            //     this.props.employees.map(employee =>
+            //         <div key={employee.id} className="card card--employee">
+            //             <div className="card-body">
+            //                 <div className="card-title">
+            //                     <img src={person} className="icon--employee" alt="employee" />
+            //                     <h5>{employee.name}</h5>
+            //                     <Link className="nav-link" to={`/employees/${employee.id}`}>Details</Link>
+            //                 </div>
+            
+            //                 <h6 class="card-subtitle mb-2 text-muted">Caretaker For</h6>
+            //                 <div className="animals--caretaker">
+            //                 {
+            //                     this.props.animals
+            //                         .filter(anml => anml.employeeId === employee.id)
+            //                         .map(anml => <AnimalCard key={anml.id} animal={anml} {...this.props} />)
+            //                 }
+            //                 </div>
+            
+            //             </div>
+            //         </div>
+            //     )
+            // }
