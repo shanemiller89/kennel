@@ -90,7 +90,7 @@ class ApplicationViews extends Component {
                 <Route path="/login" component={Login} />
                 <Route exact path="/" render={(props) => {
                 if (this.isAuthenticated()) {
-                    return <LocationList locations={this.state.locations} />
+                    return <LocationList animals={this.state.animals} locations={this.state.locations} employees={this.state.employees} />
                 } else {
                     return <Redirect to="/login" />
                 }
@@ -139,7 +139,7 @@ class ApplicationViews extends Component {
                 }} />
                 <Route exact path="/employees" render={(props) => {
                     if (this.isAuthenticated()) {
-                    return <EmployeeList {...props} employees={this.state.employees} deleteEmployee={this.deleteEmployee} />
+                    return <EmployeeList {...props} animals={this.state.animals} employees={this.state.employees} deleteEmployee={this.deleteEmployee} />
                     } else {
                         return <Redirect to="/login" />
                     }
@@ -151,7 +151,7 @@ class ApplicationViews extends Component {
                     if (!employee) {
                         employee = {id:404, name:"404", position: "Employee not found"}
                         }
-                    return <EmployeeDetail employee={employee} deleteEmployee={this.deleteEmployee} />
+                    return <EmployeeDetail employee={employee} deleteEmployee={this.deleteEmployee} animals={this.state.animals} />
                 } else {
                     return <Redirect to="/login" />
                 }

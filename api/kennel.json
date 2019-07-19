@@ -3,22 +3,26 @@
     {
       "id": 1,
       "name": "Jessica Younker",
-      "position": "Supervisor"
+      "position": "Supervisor",
+      "locationId": 2
     },
     {
       "id": 2,
       "name": "Jordan Nelson",
-      "position": "Owner"
+      "position": "Owner",
+      "locationId": 1
     },
     {
       "id": 3,
       "name": "Zoe LeBlanc",
-      "position": "Crew"
+      "position": "Crew",
+      "locationId": 2
     },
     {
       "id": 4,
       "name": "Blaise Roberts",
-      "position": "Crew"
+      "position": "Crew",
+      "locationId": 1
     }
   ],
   "locations": [
@@ -41,12 +45,6 @@
       "ownerId": 2
     },
     {
-      "id": 2,
-      "name": "Colby",
-      "breed": "Lasso",
-      "ownerId": 2
-    },
-    {
       "id": 3,
       "name": "Snoopy",
       "breed": "Beagle",
@@ -57,6 +55,12 @@
       "breed": "Super Chow",
       "employeeId": 1,
       "id": 4
+    },
+    {
+      "name": "Colby",
+      "breed": "Lasso",
+      "employeeId": 3,
+      "id": 5
     }
   ],
   "owners": [
