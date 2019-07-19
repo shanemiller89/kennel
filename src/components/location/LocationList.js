@@ -35,12 +35,3 @@ export default class LocationList extends Component {
     );
   }
 }
-
-// <h6 class="card-subtitle mb-2 text-muted">Caretaker For</h6>
-//                             <div className="animals--caretaker">
-//                             {
-//                                 this.props.animals
-//                                     .filter(anml => anml.employeeId === employee.id)
-//                                     .map(anml => <AnimalCard key={anml.id} animal={anml} {...this.props} />)
-//                             }
-//                             </div>

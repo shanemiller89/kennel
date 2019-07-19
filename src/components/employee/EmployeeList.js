@@ -1,4 +1,5 @@
 import React, { Fragment, Component } from "react";
+import EmployeeCard from "./EmployeeCard"
 import { Link } from "react-router-dom";
 import person from "./person.png";
 import AnimalCard from "../animal/AnimalCard";
@@ -21,14 +22,8 @@ export default class EmployeeList extends Component {
         </div>
         <section className="employees">
           {this.props.employees.map(employee => (
-            <div key={employee.id} className="card card--employee">
-              <div className="card-body">
-                <div className="card-title">
-                  <img src={person} className="icon--employee" alt="employee" />
-                  <h5>{employee.name}</h5>
-                  <Link className="nav-link" to={`/employees/${employee.id}`}>
-                    Details
-                  </Link>
+            <div>
+            <EmployeeCard key={employee.id} employee={employee} {...this.props} />
                   <h6 class="card-subtitle mb-2 text-muted">Caretaker For</h6>
                   <div className="animals--caretaker">
                     {this.props.animals
@@ -36,9 +31,7 @@ export default class EmployeeList extends Component {
                       .map(anml => (<AnimalCard key={anml.id} animal={anml} {...this.props} />
                       ))}
                   </div>
-                </div>
               </div>
-            </div>
           ))}
         </section>
       </Fragment>
