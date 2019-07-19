@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import person from "./person.png";
-import AnimalCard from "../animal/AnimalCard"
 import "./employee.css";
 
 export default class EmployeeCard extends Component {
@@ -16,15 +15,6 @@ export default class EmployeeCard extends Component {
                 <Link className="nav-link" to={`/employees/${this.props.employee.id}`}>
                   Details
                 </Link>
-              </div>
-
-              <h6 class="card-subtitle mb-2 text-muted">Caretaker For</h6>
-              <div className="animals--caretaker">
-                {this.props.animals
-                  .filter(anml => anml.employeeId === this.props.employee.id)
-                  .map(anml => (
-                    <AnimalCard key={anml.id} animal={anml} {...this.props} />
-                  ))}
               </div>
             </div>
           </div>
