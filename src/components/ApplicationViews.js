@@ -2,12 +2,13 @@ import { Route } from 'react-router-dom'
 import React, { Component } from 'react'
 import { withRouter } from 'react-router'
 import EmployeeList from "./employee/EmployeeList"
+import EmployeeDetail from './employee/EmployeeDetail.js'
+import EmployeeForm from './employee/EmployeeForm'
 import LocationList from "./location/LocationList.js"
 import LocationDetail from './location/LocationDetail'
 import AnimalList from './animal/AnimalList';
 import AnimalDetail from './animal/AnimalDetail'
 import AnimalForm from './animal/AnimalForm'
-import EmployeeDetail from './employee/EmployeeDetail.js'
 import OwnerList from "./owner/OwnerList.js"
 import SearchResults from "./search/SearchResults.js"
 import API from "../modules/API.js"
@@ -61,6 +62,13 @@ class ApplicationViews extends Component {
         .then(() => API.getAll("animals"))
         .then(animals => 
             this.setState({animals: animals}))
+    
+    addEmployee = employee =>
+        API.post("employees", employee)
+        .then(() => API.getAll("employees"))
+        .then(employees =>
+            this.setState({employees: employees}))
+
 
     
 
@@ -97,7 +105,7 @@ class ApplicationViews extends Component {
                        employees={this.state.employees} />
                 }} />
                 <Route exact path="/employees" render={(props) => {
-                    return <EmployeeList employees={this.state.employees} deleteEmployee={this.deleteEmployee} />
+                    return <EmployeeList {...props} employees={this.state.employees} deleteEmployee={this.deleteEmployee} />
                 }} />
                 <Route path="/employees/:employeeId(\d+)" render={(props) => {
                     let employee = this.state.employees.find( employee =>
@@ -106,6 +114,10 @@ class ApplicationViews extends Component {
                         employee = {id:404, name:"404", position: "Employee not found"}
                         }
                     return <EmployeeDetail employee={employee} deleteEmployee={this.deleteEmployee} />
+                }} />
+                <Route path="/employees/new" render={(props) => {
+                    return <EmployeeForm {...props}
+                       addEmployee={this.addEmployee} />
                 }} />
                 <Route path="/owners" render={(props) => {
                     return <OwnerList owners={this.state.owners} deleteOwner={this.deleteOwner} />
