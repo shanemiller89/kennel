@@ -2,7 +2,7 @@
   "employees": [
     {
       "id": 1,
-      "name": "Jessica Younker",
+      "name": "Jessica Younkers",
       "position": "Supervisor",
       "locationId": 2
     },
@@ -23,6 +23,12 @@
       "name": "Blaise Roberts",
       "position": "Crew",
       "locationId": 1
+    },
+    {
+      "name": "Shane Miller",
+      "position": "CEO",
+      "locationId": null,
+      "id": 5
     }
   ],
   "locations": [
@@ -42,13 +48,13 @@
       "id": 1,
       "name": "Foxy",
       "breed": "Golden Retriever",
-      "employeeId": 4
+      "employeeId": 2
     },
     {
       "id": 3,
       "name": "Snoopy",
       "breed": "Beagle",
-      "employeeId": 3
+      "employeeId": 2
     },
     {
       "name": "Barky",
@@ -57,10 +63,16 @@
       "id": 4
     },
     {
+      "id": 5,
       "name": "Colby",
       "breed": "Lasso",
-      "employeeId": 3,
-      "id": 5
+      "employeeId": 4
+    },
+    {
+      "name": "Froopy",
+      "breed": "Golden Retriever",
+      "employeeId": 4,
+      "id": 6
     }
   ],
   "owners": [
