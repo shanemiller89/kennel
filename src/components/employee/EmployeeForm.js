@@ -3,7 +3,8 @@ import React, { Component } from 'react'
 export default class EmployeeForm extends Component {
     state = {
         employeeName: "",
-        position: ""
+        position: "",
+        locationId: ""
       };
 
     handleFieldChange = evt => {
@@ -12,15 +13,20 @@ export default class EmployeeForm extends Component {
         this.setState(stateToChange);
       };
 
-    constructNewEmployee = evt => {
-        evt.preventDefault()
-        const employee = {
-            name: this.state.employeeName,
-            position: this.state.position,
-          };
-          this.props.addEmployee(employee).then(() => this.props.history.push("/employees"));
-        };
-    
+        constructNewEmployee = evt => {
+          evt.preventDefault();
+          if (this.state.location === "") {
+            window.alert("Please select a location");
+          } else {
+            const employee = {
+              name: this.state.employeeName,
+              position: this.state.position,
+              locationId: parseInt(this.state.locationId)
+            };
+            this.props.addEmployee(employee).then(() => this.props.history.push("/employees"));
+          }; 
+        }
+        
 
     render() {
         return (
@@ -48,6 +54,22 @@ export default class EmployeeForm extends Component {
                   placeholder="position"
                 />
               </div>
+              <div className="form-group">
+              <label htmlFor="employee">Assign Location</label>
+              <select
+                name="employee"
+                id="employeeId"
+                onChange={this.handleFieldChange}
+                value = {this.state.locationId}
+              >
+                <option value="">Select an location</option>
+                {this.props.locations.map(e => (
+                  <option key={e.id} id={e.id} value={e.id}>
+                    {e.name}
+                  </option>
+                ))}
+              </select>
+            </div>
               <button
                 type="submit"
                 onClick={this.constructNewEmployee}

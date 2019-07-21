@@ -14,7 +14,7 @@ export default class LocationList extends Component {
             <Link className="nav-link" to={`/locations/${location.id}`}>
               Details
             </Link>
-            <h6 class="card-subtitle mb-2 text-muted">Employs:</h6>
+            <h6 className="card-subtitle mb-2 text-muted">Employs:</h6>
             <div className="employees--location">
               {this.props.employees
                 .filter(
@@ -29,7 +29,7 @@ export default class LocationList extends Component {
             </div>
           </div>
         ))}
-        <h6 class="card-subtitle mb-2 text-muted">Employs:</h6>
+        <h6 className="card-subtitle mb-2 text-muted">Employs:</h6>
 
       </article>
     );

@@ -4,6 +4,7 @@ import { withRouter } from 'react-router'
 import EmployeeList from "./employee/EmployeeList"
 import EmployeeDetail from './employee/EmployeeDetail.js'
 import EmployeeForm from './employee/EmployeeForm'
+import EmployeeEditForm from './employee/EmployeeEditForm'
 import LocationList from "./location/LocationList.js"
 import LocationDetail from './location/LocationDetail'
 import AnimalList from './animal/AnimalList';
@@ -69,6 +70,16 @@ class ApplicationViews extends Component {
         .then(animals => {
           this.setState({
             animals: animals
+          })
+        });
+      };
+
+    updateEmployee = (editedEmployeeObject) => {
+        return API.put("employees", editedEmployeeObject)
+        .then(() => API.getAll("employees"))
+        .then(employees => {
+          this.setState({
+            employees: employees
           })
         });
       };
@@ -160,7 +171,7 @@ class ApplicationViews extends Component {
                         return <Redirect to="/login" />
                     }
                 }} />
-                <Route path="/employees/:employeeId(\d+)" render={(props) => {
+                <Route exact path="/employees/:employeeId(\d+)" render={(props) => {
                 if (this.isAuthenticated()) {
                     let employee = this.state.employees.find( employee =>
                         employee.id === parseInt(props.match.params.employeeId))
@@ -172,9 +183,15 @@ class ApplicationViews extends Component {
                     return <Redirect to="/login" />
                 }
                 }} />
+                <Route
+                exact path="/employees/:employeeId(\d+)/edit" render={props => {
+                return <EmployeeEditForm {...props} locations={this.state.locations} updateEmployee={this.updateEmployee}/>
+                }}
+                />
                 <Route path="/employees/new" render={(props) => {
                 if (this.isAuthenticated()) {
                     return <EmployeeForm {...props}
+                    locations={this.state.locations}
                        addEmployee={this.addEmployee} />
                 } else {
                     return <Redirect to="/login" />
